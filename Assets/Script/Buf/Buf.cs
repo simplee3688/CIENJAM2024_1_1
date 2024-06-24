@@ -7,6 +7,7 @@ using UnityEngine;
 public class Buf : ICloneable
 {
     [SerializeField] BufEnum bufEnum;
+    [SerializeField] bool isPassive;
     [SerializeField] float stateDuration;
     [SerializeField] float strength;
 

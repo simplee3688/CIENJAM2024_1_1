@@ -11,14 +11,14 @@ public class Player : MonoBehaviour
     [SerializeField] float gravityScale;
     [SerializeField] float dashPower;
 
-    [SerializeField] float p_x;
-    [SerializeField] float p_y;
-    [SerializeField] float dashForce;
-
     [SerializeField] bool isFloor;
     [SerializeField] int dir = 1;
     [SerializeField] int maxJumpCount = 1;
     [SerializeField] int maxDashCount = 1;
+
+    float p_x;
+    float p_y;
+    float dashForce;
 
     int jumpCount = 0;
     int dashCount = 0;
@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
             p_x = 0;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && isFloor && jumpCount > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount > 0)
         {
             jumpCount--;
             p_y = jumpPower;
@@ -103,6 +103,7 @@ public class Player : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(this.transform.position + Vector3.right * dir * 0.5f, moveVec.normalized, Vector2.Distance(Vector2.zero, moveVec * Time.deltaTime), 1 << 3);
         if(hit)
         {
+            dashForce = 0;
             rigid.MovePosition(hit.point - dir * Vector2.right * 0.5f);
         }
         else

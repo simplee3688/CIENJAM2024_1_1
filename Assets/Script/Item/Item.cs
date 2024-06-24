@@ -7,8 +7,6 @@ public class Item : MonoBehaviour
     [SerializeField] protected bool isRegenable;
     [SerializeField] protected float regenCoolTime;
 
-    
-
     protected virtual void GetItemEvent()
     {
 

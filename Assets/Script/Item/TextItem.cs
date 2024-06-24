@@ -5,5 +5,18 @@ using UnityEngine;
 public class TextItem : Item
 {
     [SerializeField] string text;
-    [SerializeField] float duration;
+    public string Text => text;
+    public float duration => regenCoolTime;
+
+    public void Start()
+    {
+        GetItemEvent();
+    }
+
+    protected override void GetItemEvent()
+    {
+        base.GetItemEvent();
+        GameManager.Instance.TextItemEvent(this);
+    }
+    
 }

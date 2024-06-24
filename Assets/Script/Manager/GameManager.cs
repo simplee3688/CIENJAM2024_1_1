@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public partial class GameManager : MonoBehaviour
 {
     float remainedTime;
     public float bufUpdateTime;
@@ -10,25 +10,11 @@ public class GameManager : MonoBehaviour
     
 
     private static GameManager instance;
-    
-    public void BufItemEvent()
-    {
-        
-    }
-
-    public void TextItemEvent(TextItem textItem)
-    {
-
-    }
-
-    private void ChangeTimeRunning(bool run)
-    {
-        if(run) Time.timeScale = 1.0f;
-        else Time.timeScale = 0.0f;
-    }
 
 
 
+
+    #region singleton
     // 인스턴스에 접근할 프로퍼티
     public static GameManager Instance
     {
@@ -84,5 +70,5 @@ public class GameManager : MonoBehaviour
             instance = null;
         }
     }
-    
+    #endregion
 }

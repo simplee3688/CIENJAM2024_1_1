@@ -1,9 +1,36 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Buf
+[System.Serializable]
+public class Buf : ICloneable
 {
-    float stateDuration;
-    float strength;
+    [SerializeField] BufEnum bufEnum;
+    [SerializeField] float stateDuration;
+    [SerializeField] float strength;
+
+    public Buf(BufEnum bufEnum, float stateDuration, float strength)
+    {
+        this.bufEnum = bufEnum;
+        this.stateDuration = stateDuration;
+        this.strength = strength;
+    }
+
+    public object Clone()
+    {
+        return new Buf(bufEnum, stateDuration, strength);
+    }
+    public float UpdateBuf(float time, out bool isContinue, out BufEnum bufEnum) 
+    {
+        stateDuration -= time;
+        if (stateDuration < 0) isContinue = false;
+        else isContinue = true;
+        bufEnum = this.bufEnum;
+        return strength;
+    }
+    override public string ToString()
+    {
+        return bufEnum.ToString() + " " + stateDuration + " " + strength;
+    }
 }

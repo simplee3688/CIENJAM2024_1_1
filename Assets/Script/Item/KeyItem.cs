@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BufItem : Item
+public class KeyItem : Item
 {
+    [SerializeField] int key;
     public override void GetItemEvent()
     {
         base.GetItemEvent();
-        GameManager.Instance.BufItemEvent();
+        Tile_BreakWithKey.GetKey(key);
     }
 }

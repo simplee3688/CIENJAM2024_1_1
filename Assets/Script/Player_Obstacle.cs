@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public partial class Player : MonoBehaviour
 {
-    [SerializeField] float speed;
-    [SerializeField] float jumpPower;
 
     [SerializeField] Obstacle[] obstacle;
 
@@ -30,14 +28,6 @@ public class Player : MonoBehaviour
         StartCoroutine(bufManager.BufManagerCoroutine(bufUpdateTime)); //버프매니저 코루틴 실행
         
 
-    }
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void GetDamageInfo(DamageInfo damageInfo)

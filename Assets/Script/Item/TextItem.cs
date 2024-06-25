@@ -13,7 +13,7 @@ public class TextItem : Item
         GetItemEvent();
     }
 
-    protected override void GetItemEvent()
+    public override void GetItemEvent()
     {
         base.GetItemEvent();
         GameManager.Instance.TextItemEvent(this);

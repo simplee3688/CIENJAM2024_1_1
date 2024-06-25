@@ -83,7 +83,7 @@ public partial class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float minSlide = 1;
+        float unGravityForce = 0;
         rigid.GetContacts(contactList);
         //Debug.Log("Count : " + contactList.Count);
         if (contactList.Count > 0)
@@ -97,7 +97,7 @@ public partial class Player : MonoBehaviour
                 float groundCheck = Vector2.Dot(Vector2.up, contactPoint.normal.normalized);
                 //Debug.Log("groundChek : " + groundCheck + ", groundCos : " + groundCos);
                 float wallCheck = Vector2.Dot(Vector2.right, contactPoint.normal.normalized);
-                //Debug.Log("wallChek : " + wallCheck + ", wallCos : " + wallCos);
+                Debug.Log("wallChek : " + wallCheck + ", wallCos : " + wallCos);
                 
                 if (groundCheck > groundCos)
                 {
@@ -111,24 +111,19 @@ public partial class Player : MonoBehaviour
                 }
                 else if (Mathf.Abs(wallCheck) > wallCos)
                 {
+                    dashForce = 0;
                     if (wallCheck < 0)
                     {
                         input_x = Mathf.Min(0, input_x);
                         p_x = Mathf.Min(0, p_x);
-                        dashForce = Mathf.Min(0, dashForce);
                     }
                     else
                     {
                         input_x = Mathf.Max(0, input_x);
                         p_x = Mathf.Max(0, p_x);
-                        dashForce = Mathf.Max(0, dashForce);
                     }
                 }
-                else if(contactPoint.normal.normalized.y > 0)
-                {
-                    minSlide = Mathf.Min(contactPoint.normal.normalized.y, minSlide);
-                    //Debug.Log("Vector : " + contactPoint.normal +  ", normal Vector : " + contactPoint.normal.normalized + ", minSlide Change : " + minSlide);
-                }
+                unGravityForce = Mathf.Max(contactPoint.normal.normalized.y, unGravityForce);
             }
             isFloor = tmpIsFloor;
         }
@@ -147,7 +142,7 @@ public partial class Player : MonoBehaviour
         if (!isFloor)
         {
             //Debug.Log(minSlide);
-            p_y -= gravityScale * minSlide;
+            p_y -= gravityScale * (1 - unGravityForce);
         }
     }
 

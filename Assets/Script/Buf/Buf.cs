@@ -11,11 +11,12 @@ public class Buf : ICloneable
     [SerializeField] float stateDuration;
     [SerializeField] float strength;
 
-    public Buf(BufEnum bufEnum, float stateDuration, float strength)
+    public Buf(BufEnum bufEnum, float stateDuration, float strength, bool isPassive = false)
     {
         this.bufEnum = bufEnum;
         this.stateDuration = stateDuration;
         this.strength = strength;
+        this.isPassive = isPassive;
     }
 
     public object Clone()

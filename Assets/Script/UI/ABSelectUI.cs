@@ -1,20 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ABSelectUI : MonoBehaviour
 {
     [SerializeField]
-    Buf[] selectABuf;
+    Image AImage, BImage;
+    
+    string Acomment, Bcomment;
+
     [SerializeField]
-    Buf[] selectBBuf;
+    Buf[] selectABuf, selectBBuf;
+    
+    public void SetABselect(string Acomment, string Bcomment, Buf[] selectABuf, Buf[] selectBBuf, Image AImage = null, Image BImage = null)
+    {
+        this.Acomment = Acomment;
+        this.Bcomment = Bcomment;
+        this.selectABuf = selectABuf;
+        this.selectBBuf = selectBBuf;
+        if(AImage != null && BImage != null)
+        {
+            this .AImage = AImage;
+            this .BImage = BImage;
+        }
+    }
     public void SelectEventStart()
     {
+        GameManager.Instance.StartEvent();
+
         gameObject.SetActive(true);
     }
 
-    public void SelectEventEnd()
+    public void SelectEventEnd(int index)
     {
+        GameManager.Instance.EndEvent(index);
+
         gameObject.SetActive(false);
     }
 
@@ -33,9 +54,11 @@ public class ABSelectUI : MonoBehaviour
         }
         else
         {
-            SelectEventEnd();
+            index = 3;
             return;
         }
+
+        SelectEventEnd(index);
         //플레이어 관련 코드
     }
 }

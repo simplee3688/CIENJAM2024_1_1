@@ -7,26 +7,16 @@ public class Item : MonoBehaviour
     [SerializeField] protected bool isRegenable;
     [SerializeField] protected float regenCoolTime;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void GetItemEvent()
+    public virtual void GetItemEvent()
     {
 
+        if (isRegenable) StartCoroutine(waitRegenTime());
     }
 
+    
     IEnumerator waitRegenTime()
     {
         float nowTime = regenCoolTime;
-        yield return null;
+        yield return new WaitForSeconds(nowTime);
     }
 }

@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Buf
+public enum BufEnum
 {
-    float stateDuration;
-    float strength;
+    none,
+    speedPercent,
+    jumpPowerPercent
+    
 }

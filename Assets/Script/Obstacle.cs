@@ -1,28 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+
 
 public class Obstacle : MonoBehaviour
 {
-    float damage;
-    float gracePeriod;
-    float slowRate;
-    float slowDuration;
+    [SerializeField] float damage;
+    [SerializeField] float gracePeriod;
+    
+    [SerializeField] List<Buf> bufs = new List<Buf>();
+    
 
-    // Start is called before the first frame update
-    void Start()
+    public DamageInfo GetDamageInfo()
     {
+        List<Buf> tmp = new List<Buf>();
+        foreach(var b in bufs)
+        {
+            tmp.Add((Buf)b.Clone());
+        }
+
+        DamageInfo damageInfos = new DamageInfo(damage, gracePeriod, tmp);
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    DamageInfo GetDamageInfo()
-    {
-        return null;
+        return damageInfos;
     }
 }

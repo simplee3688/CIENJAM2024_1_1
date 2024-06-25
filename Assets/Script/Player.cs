@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public partial class Player : MonoBehaviour
 {
     [SerializeField] float speed;
     [SerializeField] float jumpPower;
@@ -33,6 +33,11 @@ public class Player : MonoBehaviour
 
     [SerializeField] Rigidbody2D rigid;
 
+    [SerializeField] BufManager bufManager;
+    private float bufUpdateTime;
+
+    [SerializeField] float graceTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +47,10 @@ public class Player : MonoBehaviour
             this.rigid = this.AddComponent<Rigidbody2D>();
         }
         contactList = new List<ContactPoint2D>();
+
+        bufUpdateTime = GameManager.Instance.bufUpdateTime;
+
+        StartCoroutine(bufManager.BufManagerCoroutine(bufUpdateTime)); //버프매니저 코루틴 실행
     }
 
     private void Update()
@@ -67,6 +76,8 @@ public class Player : MonoBehaviour
             jumpCount--;
             p_y = jumpPower;
         }
+
+        graceTime -= Time.deltaTime;
     }
 
     // Update is called once per frame
@@ -116,7 +127,7 @@ public class Player : MonoBehaviour
                 else if(contactPoint.normal.normalized.y > 0)
                 {
                     minSlide = Mathf.Min(contactPoint.normal.normalized.y, minSlide);
-                    Debug.Log("Vector : " + contactPoint.normal +  ", normal Vector : " + contactPoint.normal.normalized + ", minSlide Change : " + minSlide);
+                    //Debug.Log("Vector : " + contactPoint.normal +  ", normal Vector : " + contactPoint.normal.normalized + ", minSlide Change : " + minSlide);
                 }
             }
             isFloor = tmpIsFloor;
@@ -127,8 +138,8 @@ public class Player : MonoBehaviour
             p_x *= 0.85f;
         }
 
-       Debug.Log("p_y : " + p_y + ", isFloor : " + isFloor + ", minSlide : " + minSlide);
-        moveVec = new Vector3(input_x + p_x + dashForce * dir, p_y, 0);
+        //Debug.Log("p_y : " + p_y + ", isFloor : " + isFloor + ", minSlide : " + minSlide);
+        moveVec = new Vector3((input_x + p_x + dashForce * dir) * bufManager.BufPercent[BufEnum.speedPercent] / 100, p_y, 0);
         rigid.MovePosition(this.transform.position + moveVec * Time.deltaTime);
 
         input_x *= 0.85f;
@@ -155,4 +166,21 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Debug.Log("isTrigger");
+        if(collision.tag == "Obstacle")
+        {
+            Debug.Log("It's Obsacle!");
+            if (graceTime <= 0)
+            {
+                var damageInfo = collision.GetComponent<Obstacle>().GetDamageInfo();
+                graceTime = damageInfo.gracePeriod;
+                foreach(Buf buf in damageInfo.bufList)
+                {
+                    bufManager.Add(buf);
+                }
+            }
+        }
+    }
 }

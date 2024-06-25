@@ -10,6 +10,7 @@ public class BufManager
     [SerializeField]
     public List<Buf> bufList = new List<Buf>();
     Dictionary<BufEnum, float> bufPercent = new Dictionary<BufEnum, float>();
+    public Dictionary<BufEnum, float> BufPercent => bufPercent;
 
     public BufManager()
     {

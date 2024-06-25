@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class Player : MonoBehaviour
+public partial class Player_Obstacle : MonoBehaviour
 {
 
     [SerializeField] Obstacle[] obstacle;
@@ -20,8 +20,8 @@ public partial class Player : MonoBehaviour
         bufUpdateTime = GameManager.Instance.bufUpdateTime; 
         for(int i = 0; i < obstacle.Length; i++)
         {
-            DamageInfo[] damages = obstacle[i].GetDamageInfo();
-            for(int j = 0; j < damages.Length; j++) GetDamageInfo(damages[j]);
+            //DamageInfo[] damages = obstacle[i].GetDamageInfo();
+            //for(int j = 0; j < damages.Length; j++) GetDamageInfo(damages[j]);
 
         }
 

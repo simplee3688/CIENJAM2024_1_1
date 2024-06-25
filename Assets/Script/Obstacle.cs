@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -11,14 +12,15 @@ public class Obstacle : MonoBehaviour
     [SerializeField] List<Buf> bufs = new List<Buf>();
     
 
-    public DamageInfo[] GetDamageInfo()
+    public DamageInfo GetDamageInfo()
     {
-        DamageInfo[] damageInfos = new DamageInfo[bufs.Count];
-        for (int i = 0; i < bufs.Count; i++)
+        List<Buf> tmp = new List<Buf>();
+        foreach(var b in bufs)
         {
-            
-            damageInfos[i] = new DamageInfo(damage, gracePeriod, (Buf)bufs[i].Clone());
+            tmp.Add((Buf)b.Clone());
         }
+
+        DamageInfo damageInfos = new DamageInfo(damage, gracePeriod, tmp);
         
         return damageInfos;
     }

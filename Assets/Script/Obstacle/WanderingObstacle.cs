@@ -30,8 +30,8 @@ public class WanderingObstacle : Obstacle
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(pos1, 0.1f);
-        Gizmos.DrawWireSphere(pos2, 0.1f);
+        Gizmos.DrawLine(new Vector2(pos1.x - 0.5f, this.transform.position.y + 0.5f), new Vector2(pos1.x - 0.5f, this.transform.position.y - 0.5f));
+        Gizmos.DrawLine(new Vector2(pos2.x + 0.5f, this.transform.position.y + 0.5f), new Vector2(pos2.x + 0.5f, this.transform.position.y - 0.5f));
     }
 
     private void FixedUpdate()

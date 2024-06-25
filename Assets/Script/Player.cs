@@ -129,6 +129,7 @@ public partial class Player : MonoBehaviour
                     }
                 }
                 unGravityForce = Mathf.Max(contactPoint.normal.normalized.y, unGravityForce);
+                Debug.Log(contactPoint.collider);
             }
             isFloor = tmpIsFloor;
         }

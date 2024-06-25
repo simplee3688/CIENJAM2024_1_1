@@ -24,7 +24,7 @@ public class Buf : ICloneable
     }
     public float UpdateBuf(float time, out bool isContinue, out BufEnum bufEnum) 
     {
-        stateDuration -= time;
+        if(!isPassive) stateDuration -= time;
         if (stateDuration < 0) isContinue = false;
         else isContinue = true;
         bufEnum = this.bufEnum;

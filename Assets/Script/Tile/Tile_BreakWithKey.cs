@@ -12,7 +12,7 @@ public class Tile_BreakWithKey : MonoBehaviour
 
         for(int i = 0; i < tile_BreakWithKeys.Length; i++)
         {
-            Destroy(tile_BreakWithKeys[i]);
+            Destroy(tile_BreakWithKeys[i].gameObject);
         }
     }
 

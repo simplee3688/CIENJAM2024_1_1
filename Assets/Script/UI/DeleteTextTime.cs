@@ -1,19 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
+using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 public class DeleteTextTime : MonoBehaviour
 {
-    float timer;
-    public void setTimer(float timer)
+    Vector2 position;
+    public void setTimer(float duration)
     {
-        this.timer = timer;
-        StartCoroutine(Timer(timer));
+        StartCoroutine(Timer(duration));
     }
 
-    private IEnumerator Timer(float time)
+    private IEnumerator Timer(float duration)
     {
-        yield return new WaitForSeconds(time);
+        
+        yield return new WaitForSeconds(duration);
+
+        
         Destroy(this.gameObject);
     }
+
 }

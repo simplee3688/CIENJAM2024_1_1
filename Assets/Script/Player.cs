@@ -32,6 +32,8 @@ public partial class Player : MonoBehaviour
     List<ContactPoint2D> contactList;
 
     [SerializeField] Rigidbody2D rigid;
+    Animator animator;
+    SpriteRenderer spriteRenderer;
 
     [SerializeField] BufManager bufManager;
     private float bufUpdateTime;
@@ -46,8 +48,11 @@ public partial class Player : MonoBehaviour
         {
             this.rigid = this.AddComponent<Rigidbody2D>();
         }
+        this.animator = this.GetComponent<Animator>();
         contactList = new List<ContactPoint2D>();
+        spriteRenderer = this.GetComponent<SpriteRenderer>();
 
+        dir = 0;
         bufUpdateTime = GameManager.Instance.bufUpdateTime;
 
         StartCoroutine(bufManager.BufManagerCoroutine(bufUpdateTime)); //버프매니저 코루틴 실행
@@ -61,10 +66,10 @@ public partial class Player : MonoBehaviour
             input_x = Input.GetAxisRaw("Horizontal") * speed;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && dashCount > 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && dashCount > 0 && Mathf.Abs(dashForce) < 1)
         {
             dashCount--;
-            dashForce = dashPower;
+            dashForce = dashPower * dir;
         }
         else if (isFloor)
         {
@@ -74,7 +79,7 @@ public partial class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && jumpCount > 0)
         {
             jumpCount--;
-            p_y = jumpPower;
+            p_y = jumpPower * Mathf.Clamp(bufManager.BufPercent[BufEnum.jumpPowerPercent], 20, 200) / 100;
         }
 
         graceTime -= Time.deltaTime;
@@ -97,7 +102,7 @@ public partial class Player : MonoBehaviour
                 float groundCheck = Vector2.Dot(Vector2.up, contactPoint.normal.normalized);
                 //Debug.Log("groundChek : " + groundCheck + ", groundCos : " + groundCos);
                 float wallCheck = Vector2.Dot(Vector2.right, contactPoint.normal.normalized);
-                Debug.Log("wallChek : " + wallCheck + ", wallCos : " + wallCos);
+                //Debug.Log("wallChek : " + wallCheck + ", wallCos : " + wallCos);
                 
                 if (groundCheck > groundCos)
                 {
@@ -134,8 +139,20 @@ public partial class Player : MonoBehaviour
         }
 
         //Debug.Log("p_y : " + p_y + ", isFloor : " + isFloor + ", minSlide : " + minSlide);
-        moveVec = new Vector3((input_x + p_x + dashForce * dir) * bufManager.BufPercent[BufEnum.speedPercent] / 100, p_y, 0);
-        rigid.MovePosition(this.transform.position + moveVec * Time.deltaTime);
+        moveVec = new Vector3((input_x + p_x + dashForce) * Mathf.Clamp(bufManager.BufPercent[BufEnum.speedPercent], 20, 200) / 100, p_y, 0);
+        RaycastHit2D ray = Physics2D.Raycast(this.transform.position, moveVec.normalized, moveVec.magnitude * Time.deltaTime, 1 << 3);
+        if(ray)
+        {
+            rigid.MovePosition(ray.point - 0.35f * (ray.point - rigid.position));
+        }
+        else
+        {
+            rigid.MovePosition(this.transform.position + moveVec * Time.deltaTime);
+        }
+
+        animator.SetFloat("movement", moveVec.magnitude); 
+        animator.SetInteger("Direction", dir);
+
 
         input_x *= 0.85f;
         dashForce *= 0.85f;
@@ -175,7 +192,30 @@ public partial class Player : MonoBehaviour
                 {
                     bufManager.Add(buf);
                 }
+                StartCoroutine("damageEffect");
             }
         }
+    }
+
+    IEnumerator damageEffect()
+    {
+        float alpha = 1;
+        int direction = -1;
+        Color newColor = spriteRenderer.color;
+        while (graceTime > 0)
+        {
+            newColor = spriteRenderer.color;
+            alpha += direction * 0.35f;
+            if(alpha > 1 || alpha < 0)
+            {
+                direction *= -1;
+                alpha = Mathf.Clamp(alpha, 0, 1);
+            }
+            newColor.a = alpha;
+            spriteRenderer.color = newColor;
+            yield return new WaitForSeconds(0.1f);
+        }
+        newColor.a = 1;
+        spriteRenderer.color = newColor;
     }
 }

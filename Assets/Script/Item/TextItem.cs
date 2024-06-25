@@ -1,4 +1,5 @@
-using System.Collections;
+using System;
+using System.Collections; 
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,15 +9,24 @@ public class TextItem : Item
     public string Text => text;
     public float duration => regenCoolTime;
 
-    public void Start()
-    {
-        GetItemEvent();
-    }
+    private bool isActived = false;
 
     public override void GetItemEvent()
     {
-        base.GetItemEvent();
-        GameManager.Instance.TextItemEvent(this);
+        if (!isActived)
+        {
+            GameManager.Instance.TextItemEvent(this, true);
+        }
+        isActived = true;
+        
+
     }
-    
+    public void ExitItemEvent()
+    {
+        isActived = false;
+        GameManager.Instance.TextItemEvent(this, false);
+
+    }
+
+
 }

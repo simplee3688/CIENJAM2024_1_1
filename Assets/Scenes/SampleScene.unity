@@ -638,16 +638,6 @@ CompositeCollider2D:
         Y: -20000000
       - X: -50000000
         Y: -20000000
-  - m_Collider: {fileID: 718503790}
-    m_ColliderPaths:
-    - - X: -110000000
-        Y: 20000000
-      - X: -120000000
-        Y: 20000000
-      - X: -120000000
-        Y: 10000000
-      - X: -110000000
-        Y: 10000000
   - m_Collider: {fileID: 810321801}
     m_ColliderPaths:
     - - X: 0
@@ -838,6 +828,16 @@ CompositeCollider2D:
         Y: -20000000
       - X: 110000000
         Y: -20000000
+  - m_Collider: {fileID: 718503790}
+    m_ColliderPaths:
+    - - X: -110000000
+        Y: 20000000
+      - X: -120000000
+        Y: 20000000
+      - X: -120000000
+        Y: 10000000
+      - X: -110000000
+        Y: 10000000
   m_CompositePaths:
     m_Paths:
     - - {x: 11.99997, y: -2}
@@ -1332,7 +1332,7 @@ Transform:
   m_GameObject: {fileID: 210214927}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.52, y: 0.49, z: 0}
+  m_LocalPosition: {x: -8.13, y: 2.533, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1356,8 +1356,18 @@ MonoBehaviour:
   dashPower: 20
   isFloor: 0
   dir: 0
-  maxJumpCount: 1
+  maxJumpCount: 3
   maxDashCount: 1
+  input_x: 0
+  p_x: 0
+  p_y: 0
+  dashForce: 0
+  jumpCount: 0
+  dashCount: 0
+  groundAngle: 80
+  wallAngle: 10
+  moveVec: {x: 0, y: 0, z: 0}
+  rigid: {fileID: 0}
 --- !u!1 &233505853
 GameObject:
   m_ObjectHideFlags: 0
@@ -2184,7 +2194,7 @@ Transform:
   m_GameObject: {fileID: 531143359}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.52, y: 0.49, z: -10}
+  m_LocalPosition: {x: -8.13, y: 2.533, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2721,7 +2731,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718503789}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -11.5, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5124,7 +5134,7 @@ Transform:
   m_GameObject: {fileID: 1269427188}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.52, y: 0.49, z: -10}
+  m_LocalPosition: {x: -8.13, y: 2.533, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5980,7 +5990,7 @@ Transform:
   m_GameObject: {fileID: 1452243658}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3279624, y: 0.00000023841858, z: -10}
+  m_LocalPosition: {x: 23.42783, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8286,9 +8296,7 @@ PolygonCollider2D:
     m_Paths:
     - - {x: -12, y: 5}
       - {x: 12, y: 5}
-      - {x: 12, y: 2.4509153}
       - {x: 12, y: -5}
-      - {x: 6.8080235, y: -5}
       - {x: -12, y: -5}
   m_UseDelaunayMesh: 0
 --- !u!156049354 &1970453843

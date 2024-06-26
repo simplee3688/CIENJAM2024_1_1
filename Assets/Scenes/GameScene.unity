@@ -16773,7 +16773,7 @@ Transform:
   m_GameObject: {fileID: 1038199199}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.1111116, y: 0, z: -10}
+  m_LocalPosition: {x: -0.32796192, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23137,6 +23137,7 @@ MonoBehaviour:
   bufManager:
     bufList: []
   graceTime: 0
+  timeManager: {fileID: 2004574468}
   ability: 000000
 --- !u!61 &1418591334
 BoxCollider2D:
@@ -31531,6 +31532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2004574467}
   - component: {fileID: 2004574466}
+  - component: {fileID: 2004574468}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -31551,6 +31553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bufUpdateTime: 0.1
+  player: {fileID: 0}
   TextUIPrefab: {fileID: 6888129194924694682, guid: bb1d2390c2cc65148b167c8f5c0afe8d, type: 3}
   canvasRectTransform: {fileID: 756008397}
   ABselectManager: {fileID: 681861892}
@@ -31570,6 +31573,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2004574468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004574465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6108a79b5b35b049a6e6224d1e1395f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2011852141
 GameObject:
   m_ObjectHideFlags: 0

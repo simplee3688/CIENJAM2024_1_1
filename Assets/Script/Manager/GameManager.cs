@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public partial class GameManager : MonoBehaviour
 {
-    float remainedTime;
     public float bufUpdateTime;
+    TimeGetAdapter timeGetAdapter;
+    [SerializeField] Player player;
     
-    
-
     private static GameManager instance;
-
 
 
 
@@ -31,6 +30,15 @@ public partial class GameManager : MonoBehaviour
                     GameObject singletonObject = new GameObject();
                     instance = singletonObject.AddComponent<GameManager>();
                     singletonObject.name = typeof(GameManager).ToString() + " (Singleton)";
+                    if(instance.player != null)
+                    {
+                        Player _player = GameObject.FindObjectOfType<Player>();
+                        if(_player != null )
+                        {
+                            instance.player = _player;
+                            instance.timeGetAdapter = instance.GetComponent<TimeManager>();
+                        }
+                    }
                 }
             }
 

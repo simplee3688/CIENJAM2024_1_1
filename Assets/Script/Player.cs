@@ -83,7 +83,7 @@ public partial class Player : MonoBehaviour
         }
 
         graceTime -= Time.deltaTime;
-        timeManager.reduceTime(Time.deltaTime);
+        timeManager.reduceTime(Time.deltaTime * bufManager.BufPercent[BufEnum.timeFlowSpeedPercent] / 100);
     }
 
     // Update is called once per frame
@@ -115,10 +115,6 @@ public partial class Player : MonoBehaviour
                         p_y = 0;
                     }
                 }
-                else if(-groundCheck > groundCheck && p_y > 0)
-                {
-                    p_y = 0;
-                }
                 else if (Mathf.Abs(wallCheck) > wallCos)
                 {
                     dashForce = 0;
@@ -132,6 +128,10 @@ public partial class Player : MonoBehaviour
                         input_x = Mathf.Max(0, input_x);
                         p_x = Mathf.Max(0, p_x);
                     }
+                }
+                else if (-groundCheck > groundCheck && p_y > 0)
+                {
+                    p_y = 0;
                 }
                 unGravityForce = Mathf.Max(contactPoint.normal.normalized.y, unGravityForce);
                 Debug.Log(contactPoint.collider);

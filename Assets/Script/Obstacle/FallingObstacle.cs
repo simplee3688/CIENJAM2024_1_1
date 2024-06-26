@@ -20,9 +20,9 @@ public class FallingObstacle : Obstacle
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(new Vector3(transform.position.x - 1, startHeight), new Vector3(transform.position.x + 1, startHeight));
-        Gizmos.DrawLine(new Vector3(transform.position.x - 1, endHeight), new Vector3(transform.position.x + 1, endHeight));
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(new Vector3(transform.position.x - 0.5f, startHeight + 0.5f), new Vector3(transform.position.x + 0.5f, startHeight + 0.5f));
+        Gizmos.DrawLine(new Vector3(transform.position.x - 0.5f, endHeight - 0.5f), new Vector3(transform.position.x + 0.5f, endHeight - 0.5f));
     }
 
     private void FixedUpdate()

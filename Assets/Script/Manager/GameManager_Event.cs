@@ -68,8 +68,11 @@ public partial class GameManager : MonoBehaviour
         else Time.timeScale = 0.0f;
     }
 
-    public void RestartScene()
+    
+
+
+    public void Gameover()
     {
-        SceneManager.LoadScene(gameObject.scene.ToString());
+        SceneManager.LoadScene("RestartScene");
     }
 }

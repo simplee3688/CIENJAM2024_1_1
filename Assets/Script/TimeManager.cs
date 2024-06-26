@@ -16,6 +16,14 @@ public class TimeManager : MonoBehaviour, TimeGetAdapter
         remainTime -= time;
     }
 
+    private void CheckTimeOut()
+    {
+        if (remainTime <= 0)
+        {
+            GameManager.Instance.Gameover();
+        }
+    }
+
     public void setting(float time)
     {
         remainTime = time;

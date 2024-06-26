@@ -23,7 +23,7 @@ public class Item : MonoBehaviour
 
     private void active(bool isActive)
     {
-        GetComponent<SpriteRenderer>().enabled = isActive;
+        GetComponent<Renderer>().enabled = isActive;
         GetComponent<BoxCollider2D>().enabled = isActive;
     }
 }

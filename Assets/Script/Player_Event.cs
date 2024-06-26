@@ -71,7 +71,15 @@ public partial class Player : MonoBehaviour
         {
             collision.GetComponent<BufItem>().GetItemEvent(this);   
         }
-
+        else if(collision.tag == "Respawn")
+        {
+            ResponeArea respawnInfo = collision.GetComponent<ResponeArea>();
+            if(respawnInfo != null)
+            {
+                timeManager.reduceTime(respawnInfo.getCost());
+                this.transform.position = respawnInfo.getRespawnPosition();
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

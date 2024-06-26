@@ -39,6 +39,7 @@ public partial class Player : MonoBehaviour
     private float bufUpdateTime;
 
     [SerializeField] float graceTime;
+    [SerializeField] TimeManager timeManager;
 
     // Start is called before the first frame update
     void Start()
@@ -65,8 +66,6 @@ public partial class Player : MonoBehaviour
             dir = Input.GetAxisRaw("Horizontal") > 0 ? 1 : -1;
             input_x = Input.GetAxisRaw("Horizontal") * speed;
         }
-        
-
         if (Input.GetKeyDown(KeyCode.LeftShift) && dashCount > 0 && Mathf.Abs(dashForce) < 1)
         {
             dashCount--;
@@ -84,6 +83,7 @@ public partial class Player : MonoBehaviour
         }
 
         graceTime -= Time.deltaTime;
+        timeManager.reduceTime(Time.deltaTime);
     }
 
     // Update is called once per frame
@@ -185,9 +185,7 @@ public partial class Player : MonoBehaviour
             }
         }
     }
-
     
-
     IEnumerator damageEffect()
     {
         float alpha = 1;

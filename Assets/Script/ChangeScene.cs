@@ -15,12 +15,16 @@ public class ChangeScene : MonoBehaviour
         
     }
     public void SceneChange() {
-        
-         
-            if (time > 0.1f) {
+
+
+        while (true)
+        {
+            if (time > 0.1f)
+            {
                 story1.SetActive(state);
             }
-            if(time > 30.0f) {
+            if (time > 30.0f)
+            {
                 story2.SetActive(state);
             }
             if (time > 50.0f)
@@ -28,6 +32,7 @@ public class ChangeScene : MonoBehaviour
                 story3.SetActive(state);
                 break;
             }
+        }
 
  
 

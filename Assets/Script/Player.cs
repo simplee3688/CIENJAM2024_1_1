@@ -114,6 +114,10 @@ public partial class Player : MonoBehaviour
                         p_y = 0;
                     }
                 }
+                else if(-groundCheck > groundCheck && p_y > 0)
+                {
+                    p_y = 0;
+                }
                 else if (Mathf.Abs(wallCheck) > wallCos)
                 {
                     dashForce = 0;

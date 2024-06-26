@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/StartScene.unity
+    path: Assets/Scenes/startscene.unity
     guid: 41f4310d5a39cc14991cc1ca76eef8fa
   - enabled: 1
     path: Assets/Scenes/tempScene/ttt.unity
@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RestartScene.unity
     guid: e18dcc63bed388842b9ed3efae0e2c15
+  - enabled: 1
+    path: Assets/Scenes/EndingScene_false.unity
+    guid: 61e270fd63fc0e24abeed511e706ba8e
+  - enabled: 1
+    path: Assets/Scenes/EndingScene_true.unity
+    guid: b1f09ea12a7906449ba481b5316e6d7d
   m_configObjects: {}

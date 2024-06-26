@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public partial class GameManager : MonoBehaviour
 {
@@ -67,5 +68,8 @@ public partial class GameManager : MonoBehaviour
         else Time.timeScale = 0.0f;
     }
 
-    
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(gameObject.scene.ToString());
+    }
 }

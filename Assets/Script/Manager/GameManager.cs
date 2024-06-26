@@ -6,7 +6,7 @@ using UnityEngine;
 public partial class GameManager : MonoBehaviour
 {
     public float bufUpdateTime;
-    TimeGetAdapter timeGetAdapter;
+    public TimeGetAdapter timeGetAdapter;
     [SerializeField] Player player;
     
     private static GameManager instance;
@@ -19,34 +19,46 @@ public partial class GameManager : MonoBehaviour
     {
         get
         {
+            Debug.Log("call instance");
             // 인스턴스가 아직 존재하지 않는다면 찾거나 생성합니다.
             if (instance == null)
             {
-                instance = FindObjectOfType<GameManager>();
-
-                // 인스턴스가 아직도 null이라면 새로운 게임 오브젝트를 생성하여 할당합니다.
-                if (instance == null)
+                Debug.Log("NOOO");
+                lock (new Object())
                 {
-                    GameObject singletonObject = new GameObject();
-                    instance = singletonObject.AddComponent<GameManager>();
-                    singletonObject.name = typeof(GameManager).ToString() + " (Singleton)";
-                    if(instance.player != null)
+                    if(instance == null)
                     {
-                        Player _player = GameObject.FindObjectOfType<Player>();
-                        if(_player != null )
+                        instance = FindObjectOfType<GameManager>();
+
+                        // 인스턴스가 아직도 null이라면 새로운 게임 오브젝트를 생성하여 할당합니다.
+                        if (instance == null)
                         {
-                            instance.player = _player;
-                            instance.timeGetAdapter = instance.GetComponent<TimeManager>();
+                            GameObject singletonObject = new GameObject();
+                            instance = singletonObject.AddComponent<GameManager>();
+                            singletonObject.name = typeof(GameManager).ToString() + " (Singleton)";
+                            if (instance.player != null)
+                            {
+                                instance.timeGetAdapter = singletonObject.AddComponent<TimeManager>();
+                                Debug.Log(instance.timeGetAdapter.getRemainTime());
+                            }
+                            else
+                            {
+                                Player _player = GameObject.FindObjectOfType<Player>();
+                                if (_player != null)
+                                {
+                                    instance.player = _player;
+                                    instance.timeGetAdapter = instance.GetComponent<TimeManager>();
+                                }
+                            }
                         }
                     }
+                    instance.timeGetAdapter = instance.gameObject.GetComponent<TimeManager>();
                 }
             }
 
             return instance;
         }
     }
-
-    
 
     // 싱글톤 인스턴스가 존재하는지 확인하는 속성
     public static bool IsInitialized
@@ -60,6 +72,7 @@ public partial class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this as GameManager;
+            instance.timeGetAdapter = instance.gameObject.GetComponent<TimeManager>();
             DontDestroyOnLoad(gameObject);
         }
         else if (instance != this)

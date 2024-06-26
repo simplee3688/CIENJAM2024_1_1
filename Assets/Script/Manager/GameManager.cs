@@ -73,7 +73,7 @@ public partial class GameManager : MonoBehaviour
         {
             instance = this as GameManager;
             instance.timeGetAdapter = instance.gameObject.GetComponent<TimeManager>();
-            DontDestroyOnLoad(gameObject);
+            
         }
         else if (instance != this)
         {

@@ -12,6 +12,7 @@ public class WeakTile : MonoBehaviour
     [SerializeField] CompositeCollider2D comCollider;
 
     [SerializeField] bool isDelete;
+    [SerializeField] bool isThereAnything;
 
     private void Start()
     {
@@ -49,10 +50,31 @@ public class WeakTile : MonoBehaviour
         yield return new WaitForSeconds(responeTime);
         this.gameObject.SetActive(true);
 
+        while (isThereAnything)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+
         comCollider.isTrigger = false;
         Color color = tileMap.color;
         color.a = 1;
         tileMap.color = color;
         isDelete = false;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            isThereAnything = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            isThereAnything = false;
+        }
     }
 }

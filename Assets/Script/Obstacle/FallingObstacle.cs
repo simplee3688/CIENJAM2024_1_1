@@ -7,15 +7,22 @@ public class FallingObstacle : Obstacle
     [SerializeField] float startHeight;
     [SerializeField] float endHeight;
 
+    [SerializeField] float respawnTime;
     [SerializeField] float p_y;
     [SerializeField] float gravityScale;
 
+    bool isActive;
+
     Rigidbody2D rigid;
+    Renderer render;
+    
 
     private void Start()
     {
+        render = GetComponent<Renderer>();
         rigid = GetComponent<Rigidbody2D>();
         rigid.MovePosition(new Vector2(this.rigid.position.x, startHeight));
+        isActive = true;
     }
 
     private void OnDrawGizmos()
@@ -27,17 +34,31 @@ public class FallingObstacle : Obstacle
 
     private void FixedUpdate()
     {
-        if(this.rigid.position.y < endHeight)
+        if(isActive)
         {
-            p_y = 0;
-            rigid.MovePosition(new Vector2(this.rigid.position.x, startHeight));
-        }
-        else
-        {
-            Vector2 moveVec = new Vector2(0, p_y);
-            rigid.MovePosition(this.rigid.position + moveVec * Time.deltaTime);
-        }
+            if (this.rigid.position.y < endHeight)
+            {
+                p_y = 0;
+                rigid.MovePosition(new Vector2(this.rigid.position.x, startHeight));
+                render.enabled = false;
+                isActive = false;
+                StartCoroutine("Respawn");
+            }
+            else
+            {
+                Vector2 moveVec = new Vector2(0, p_y);
+                rigid.MovePosition(this.rigid.position + moveVec * Time.deltaTime);
+            }
 
-        p_y -= gravityScale;
+            p_y -= gravityScale;
+        }
+    }
+
+    IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(respawnTime);
+
+        isActive = true;
+        render.enabled = true;
     }
 }

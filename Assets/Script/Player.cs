@@ -90,7 +90,7 @@ public partial class Player : MonoBehaviour
     {
         float unGravityForce = 0;
         rigid.GetContacts(contactList);
-        //Debug.Log("Count : " + contactList.Count);
+        Debug.Log("Count : " + contactList.Count);
         if (contactList.Count > 0)
         {
             float groundCos = Mathf.Cos(groundAngle / 180 * Mathf.PI);
@@ -129,6 +129,7 @@ public partial class Player : MonoBehaviour
                     }
                 }
                 unGravityForce = Mathf.Max(contactPoint.normal.normalized.y, unGravityForce);
+                Debug.Log(contactPoint.collider);
             }
             isFloor = tmpIsFloor;
         }

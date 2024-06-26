@@ -6504,7 +6504,7 @@ Transform:
   m_GameObject: {fileID: 1452243658}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.1111107, y: -0.000000059604645, z: -10}
+  m_LocalPosition: {x: -2.8574734, y: -0.000000059604645, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6555,29 +6555,14 @@ GameObject:
   - component: {fileID: 1463727341}
   - component: {fileID: 1463727340}
   - component: {fileID: 1463727339}
-  - component: {fileID: 1463727338}
+  - component: {fileID: 1463727342}
   m_Layer: 0
-  m_Name: selectTiem
+  m_Name: timePlusItem
   m_TagString: BufItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1463727338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463727337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 594398b0ad64efc4a8ca81a4fb3f0986, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isRegenable: 0
-  regenCoolTime: 0
-  bufs: []
 --- !u!61 &1463727339
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6690,6 +6675,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1463727342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1463727337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e775f45baffac24792b2e98194e6068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRegenable: 1
+  regenCoolTime: 10
+  bufs:
+  - bufEnum: 3
+    isPassive: 0
+    stateDuration: 5
+    strength: 100
 --- !u!1 &1471737030
 GameObject:
   m_ObjectHideFlags: 0

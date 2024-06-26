@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SangSaController
+  m_Controller: {fileID: 9100000, guid: 48e3d8139c8689d4d974ca48651af76f, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 214eec3f1b934ed4b846a64e38e3d979, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a8236279b92bcca4eabedbb4d039379c, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: f112be495b2a5cb43b5d9aeb11fce1f6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 569eef9002e9a124abc9f753034a100b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 733a9d53d8a5055439f6d54510b23576, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7a388b12c3b8cc54dbf5cc480c9ce6a9, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 7dbebd10a52e14e4fb3c1e002e0b1da6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 916a3159df9557e46aa98680ab77f6e1, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 53a70a4d0996aaa449995a4ad1f44182, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e75870a5212c17149a13aebcab93f23d, type: 2}

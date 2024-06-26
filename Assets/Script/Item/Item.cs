@@ -9,7 +9,7 @@ public class Item : MonoBehaviour
 
     public virtual void GetItemEvent()
     {
-
+        active(false);
         if (isRegenable) StartCoroutine(waitRegenTime());
     }
 
@@ -18,5 +18,12 @@ public class Item : MonoBehaviour
     {
         float nowTime = regenCoolTime;
         yield return new WaitForSeconds(nowTime);
+        active(true);
+    }
+
+    private void active(bool isActive)
+    {
+        GetComponent<SpriteRenderer>().enabled = isActive;
+        GetComponent<BoxCollider2D>().enabled = isActive;
     }
 }

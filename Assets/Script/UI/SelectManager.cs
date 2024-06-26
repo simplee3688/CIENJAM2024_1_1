@@ -13,6 +13,8 @@ public class SelectManager : MonoBehaviour
     [SerializeField]
     int[] cost;
 
+    public int selectIndex { get; private set; }
+
     public void Start()
     {
         buttons = new GameObject[text.Length];
@@ -25,24 +27,25 @@ public class SelectManager : MonoBehaviour
 
     public void SelectEventStart()
     {
+        GameManager.Instance.StartEvent();
         gameObject.SetActive(true);
     }
 
-    public void SelectEventEnd()
+    public void SelectEventEnd(int index)
     {
+        GameManager.Instance.EndEvent(index);
         gameObject.SetActive(false);
     }
     public void SelectOption(int index)
     {
         Debug.Log(index + " : select");
-
-        if(true)
+        selectIndex = index;
+        if(true)    //조건
         {
             buttons[index].SetActive(false);
 
             //cost 지불
-            //플레이어 관련 버프
-            SelectEventEnd();
+            SelectEventEnd(index);
         }
 
 

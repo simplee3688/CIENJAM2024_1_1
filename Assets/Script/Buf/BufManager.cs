@@ -40,6 +40,7 @@ public class BufManager
 
     public void Add(Buf buf)
     {
+        
         bufList.Add(buf);
         Testcode();
     }

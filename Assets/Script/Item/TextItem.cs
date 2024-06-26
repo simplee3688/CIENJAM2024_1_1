@@ -11,6 +11,11 @@ public class TextItem : Item
 
     private bool isActived = false;
 
+    public void Start()
+    {
+        GameManager.Instance.TextItemEvent(this, false);    
+    }
+
     public override void GetItemEvent()
     {
         if (!isActived)
@@ -18,8 +23,6 @@ public class TextItem : Item
             GameManager.Instance.TextItemEvent(this, true);
         }
         isActived = true;
-        
-
     }
     public void ExitItemEvent()
     {

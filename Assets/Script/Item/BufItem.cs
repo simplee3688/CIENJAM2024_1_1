@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class BufItem : Item
 {
-    public override void GetItemEvent()
+    [SerializeField] Buf[] bufs;
+    public virtual void GetItemEvent(Player player)
     {
         base.GetItemEvent();
-        GameManager.Instance.BufItemEvent();
+        
+        player.addBufs(getBufs(bufs));
+    }
+
+    protected Buf[] getBufs(Buf[] bufs)
+    {
+        Buf[] bufs2 = new Buf[bufs.Length];
+        for (int i = 0; i < bufs.Length; i++)
+        {
+            bufs2[i] = (Buf)bufs[i].Clone();
+        }
+        return bufs2;
     }
 }

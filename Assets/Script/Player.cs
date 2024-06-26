@@ -183,38 +183,7 @@ public partial class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        Debug.Log("isTrigger");
-        if(collision.tag == "Obstacle")
-        {
-            Debug.Log("It's Obsacle!");
-            if (graceTime <= 0)
-            {
-                var damageInfo = collision.GetComponent<Obstacle>().GetDamageInfo();
-                graceTime = damageInfo.gracePeriod;
-                foreach(Buf buf in damageInfo.bufList)
-                {
-                    bufManager.Add(buf);
-                }
-                StartCoroutine("damageEffect");
-            }
-        }
-        else if (collision.tag == "TextItem")
-        {
-            collision.GetComponent<TextItem>().GetItemEvent();
-        }
-        else if (collision.tag == "KeyItem")
-        {
-            collision.GetComponent<KeyItem>().GetItemEvent();
-        }
-
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if(collision.tag == "TextItem") collision.GetComponent<TextItem>().ExitItemEvent();
-    }
+    
 
     IEnumerator damageEffect()
     {

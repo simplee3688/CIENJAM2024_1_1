@@ -8,6 +8,7 @@ TagManager:
   - TextItem
   - KeyItem
   - GameOver
+  - BufItem
   layers:
   - Default
   - TransparentFX

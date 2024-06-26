@@ -6,6 +6,6 @@ public enum BufEnum
 {
     none,
     speedPercent,
-    jumpPowerPercent
-    
+    jumpPowerPercent,
+    time    //항상 마지막은 시간 증감
 }

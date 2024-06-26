@@ -65,6 +65,7 @@ public partial class Player : MonoBehaviour
             dir = Input.GetAxisRaw("Horizontal") > 0 ? 1 : -1;
             input_x = Input.GetAxisRaw("Horizontal") * speed;
         }
+        
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && dashCount > 0 && Mathf.Abs(dashForce) < 1)
         {
@@ -141,6 +142,7 @@ public partial class Player : MonoBehaviour
         {
             isFloor = false;
             p_x *= 0.85f;
+            
         }
 
         //Debug.Log("p_y : " + p_y + ", isFloor : " + isFloor + ", minSlide : " + minSlide);
@@ -160,6 +162,7 @@ public partial class Player : MonoBehaviour
 
 
         input_x *= 0.85f;
+        if (Input.GetAxisRaw("Horizontal") == 0) input_x *= 0.9f;
         dashForce *= 0.85f;
         if (!isFloor)
         {
